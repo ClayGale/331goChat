@@ -11,5 +11,5 @@ import (
 
 func main() {
 	http.HandleFunc("/", mainHandler)
-
+	http.HandleFunc("/sendMessage", sendMessage)
 }
