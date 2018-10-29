@@ -4,8 +4,9 @@ import (
 	_ "database/sql"
 	_ "html/template"
 	_ "net/http"
+	_ "string"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
 
 func main() {
