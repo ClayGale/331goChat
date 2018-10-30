@@ -19,55 +19,56 @@ type User struct { //user struct for passing the username into the chat page
 	username string
 }
 
+func welcome(w http.ResponseWriter, r *http.Request) {
+
+	t, _ := template.ParseFiles("login.gtpl") //sending login page
+	t.Execute(w, nil)
+}
+
 var chatTemplate = template.Must(template.ParseFiles("chat.gtpl"))
 
 func login(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("method:", r.Method) //get request method
+	r.ParseForm()
+	// retrieving form data from inputs
+	//nameTemp := r.Form["name"]
+	//colourTemp := r.Form["colour"]
+	//name := strings.Join(nameTemp, " ")
+	//colour := strings.Join(colourTemp, " ")
 
-	if r.Method == "GET" {
-		t, _ := template.ParseFiles("login.gtpl")
-		t.Execute(w, nil)
-	} else {
-		r.ParseForm()
-		// retrieving form data from inputs
-		//nameTemp := r.Form["name"]
-		//colourTemp := r.Form["colour"]
-		//name := strings.Join(nameTemp, " ")
-		//colour := strings.Join(colourTemp, " ")
+	db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
+	checkErr(err)
+	//creating users table if it doesnt exist already
+	stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS users ( name varchar(20), colour varchar(10))")
+	checkErr(err)
 
-		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
-		checkErr(err)
-		//creating users table if it doesnt exist already
-		stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS users ( name varchar(20), colour varchar(10))")
-		checkErr(err)
+	_, err := stmt.Exec() //running above sql
+	checkErr(err)
+	//inserting
+	stmt, err := db.Prepare("INSERT INTO users(name, colour) values(?,?)")
+	checkErr(err)
 
-		_, err := stmt.Exec() //running above sql
-		checkErr(err)
-		//inserting
-		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(?,?)")
-		checkErr(err)
+	res, err := stmt.Exec(r.Form["name"], r.Form["colour"]) //running above sql with value parameters
+	checkErr(err)
+	fmt.Println(res)
 
-		res, err := stmt.Exec(r.Form["name"], r.Form["colour"]) //running above sql with value parameters
-		checkErr(err)
-		fmt.Println(res)
-
-		data := &User{
-			username: name,
-		}
-
-		chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
-		//t, _ := template.ParseFiles("chat.gtpl", data)
-		//t.Execute(w, nil)
+	data := &User{
+		username: name,
 	}
+
+	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
+	//t, _ := template.ParseFiles("chat.gtpl", data)
+	//t.Execute(w, nil)
 }
 
-func checkErr(err) {
-	if err != nil {
-		fmt.Println(err)
+func checkErr(error err) {
+	e := err.Error() //retrieving and printing error string
+	if e != nil {
+		fmt.Println(e)
 	}
 }
 
 func main() {
-	http.HandleFunc("/", login)
+	http.HandleFunc("/", welcome)
+	http.HandleFunc("/login", login)
 	http.HandleFunc("/sendMessage", sendMessage)
 }

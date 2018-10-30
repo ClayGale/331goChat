@@ -10,12 +10,12 @@
 	<h2><center> Lets Talk All Together</center></h2>
 
 	<div id="container">
-		<form>
+		<form action="/login">
 			<label for="username">Create a Username:</label>
-			<input type="text" id="username" name="username" maxlength="20" required>
+			<input type="text" id="username" name="name" maxlength="20" required>
 			<p style="padding-left: 20px">Choose a User Colour:</p>
 
-			<select id="soflow">
+			<select id="soflow" name="colour">
 				<option value="0" selected disabled>Select your User Colour</option>
 				<option value="red">Red</option> <!--#FF0000-->
 				<option value="orange">Orange</option><!--#FFA500 -->
