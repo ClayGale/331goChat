@@ -16,6 +16,10 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.Form)
 }
 
+type User struct { //user struct for passing the username into the chat page
+	name string
+}
+
 func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 
@@ -27,17 +31,19 @@ func login(w http.ResponseWriter, r *http.Request) {
 		// retrieving form data from inputs
 		name := r.Form["name"]
 		colour := r.Form["colour"]
+		name := strings.Join(name, " ")
+		colour := strings.Join(colour, " ")
 
 		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
-		checkErr(err)
+		//checkErr(err)
 
 		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
-		checkErr(err)
+		//checkErr(err)
 
 		res, err = stmt.Exec()
-		checkErr(err)
+		//checkErr(err)
 
-		data := &Index{
+		data := &User{
 			username: name,
 		}
 
