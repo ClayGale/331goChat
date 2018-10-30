@@ -6,8 +6,9 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strings"
+	"os"
 	"path/filepath"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
@@ -24,7 +25,7 @@ type User struct { //user struct for passing the username into the chat page
 
 func welcome(w http.ResponseWriter, r *http.Request) {
 
-	t, _ := template.ParseFiles("./login.gtpl")) //sending login page
+	t, _ := template.ParseFiles("./login.gtpl") //sending login page
 	t.Execute(w, nil)
 }
 
