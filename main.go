@@ -24,7 +24,7 @@ type User struct { //user struct for passing the username into the chat page
 
 func welcome(w http.ResponseWriter, r *http.Request) {
 
-	t, _ := template.ParseFiles("./login.gtpl") //sending login page
+	t, _ := template.Must(template.ParseFiles("/go/src/github.com/ClayGale/331goChat/login.gtpl")) //sending login page
 	t.Execute(w, nil)
 }
 
