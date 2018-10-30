@@ -1,7 +1,7 @@
 FROM golang:1.11.1
 
 
-COPY ./go /go/src/github.com/ClayGale/331goChat
+COPY $HOME/go /go/src/github.com/ClayGale/331goChat
 WORKDIR /go/src/github.com/ClayGale/331goChat
 
 RUN go get ./
