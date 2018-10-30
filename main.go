@@ -37,13 +37,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 		colour := strings.Join(colourTemp, " ")
 
 		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
-		//checkErr(err)
+		checkErr(err)
 
 		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
-		//checkErr(err)
+		checkErr(err)
 
 		res, err := stmt.Exec() //running above sql
-		//checkErr(err)
+		checkErr(err)
+		fmt.Println(res)
 
 		data := &User{
 			username: name,
@@ -52,6 +53,12 @@ func login(w http.ResponseWriter, r *http.Request) {
 		chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
 		//t, _ := template.ParseFiles("chat.gtpl", data)
 		//t.Execute(w, nil)
+	}
+}
+
+func checkerr(string err) {
+	if err != nil {
+		fmt.Println(err)
 	}
 }
 
