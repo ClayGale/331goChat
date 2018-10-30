@@ -4,7 +4,7 @@ html, body {
 height: 100%;   
 font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;   
 color: #444;   
--webkit-font-smoothing: antialiased;    background: #F6FFFB;
+-webkit-font-smoothing: antialiased; background: white;
 }
 
 #container {
@@ -15,7 +15,7 @@ color: #444;
     left: 50%;
     margin-top: -140px;
     margin-left: -170px;
-	background: #fff;
+	background: #F6FFFB;
     border-radius: 3px;
     border: 1px solid #ccc;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
@@ -51,7 +51,7 @@ input[type=text] {
     color: #777;
     padding-left: 10px;
     margin: 10px;
-    margin-top: 12px;
+    margin-top: 10px;
     margin-left: 18px;
     width: 290px;
     height: 35px;
@@ -75,21 +75,30 @@ input[type=checkbox] {
 }
 
 /*login button*/
-input[type=submit] {
-    float: right;
-    margin-right: 20px;
-    margin-top: 20px;
-    width: 80px;
-    height: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #acd6ef; /*IE fallback*/
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#acd6ef), to(#6ec2e8));
-    background-image: -moz-linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-    background-image: linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-    border-radius: 30px;
-    border: 1px solid #66add6;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
-    cursor: pointer;
+
 }
+/*login button end*/
+
+
+/*select tag*/
+select#soflow, select#soflow-color {
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   margin: 20px;
+   overflow: hidden;
+   padding: 10px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
+}
+/*select tag end*/
