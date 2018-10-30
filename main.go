@@ -24,6 +24,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		r.ParseForm()
 		// send inputs to chat page TODO
+		name := r.Form["name"]
+		colour := r.Form["colour"]
 	}
 }
 
