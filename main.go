@@ -30,7 +30,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 }
 
 //d, _ := os.Getwd()
-var chatTemplate = template.Must(template.ParseFiles(filepath.Join(os.Getwd(), "./chat.gohtml")))
+var chatTemplate = template.Must(template.ParseFiles(filepath.Join(fetchPath(), "./chat.gohtml")))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
@@ -68,12 +68,11 @@ func checkErr(err error) {
 	}
 }
 
-/*
 func fetchPath() (d string) {
 	d, _ = os.Getwd()
 	return d
 }
-*/
+
 func main() {
 	http.HandleFunc("/", welcome)
 	http.HandleFunc("/login", login)
