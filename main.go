@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
@@ -28,7 +29,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 }
 
 //d, _ := os.Getwd()
-//var chatTemplate = template.Must(template.ParseFiles(d + "/chat.tmpl"))
+var chatTemplate = template.Must(template.ParseFiles(fetchPath() + "/chat.tmpl"))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
@@ -55,7 +56,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		username: name,
 	}
 
-	//chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
+	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
 	//t, _ := template.ParseFiles("chat.gtpl", data)
 	//t.Execute(w, nil)
 }
@@ -64,6 +65,11 @@ func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func fetchPath() (d string) {
+	d, _ = os.Getwd()
+	return d
 }
 
 func main() {
