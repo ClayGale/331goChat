@@ -42,7 +42,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
 		//checkErr(err)
 
-		res, err = stmt.Exec() //running above sql
+		res, err := stmt.Exec() //running above sql
 		//checkErr(err)
 
 		data := &User{
