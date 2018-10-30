@@ -7,6 +7,8 @@ create digital ocean server //EXPAND
 Step 2:
 Install relevant software
 
+Step 3:
+Pull repo
 Step n:
 Create the database tables with
 ```
