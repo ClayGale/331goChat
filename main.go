@@ -13,7 +13,7 @@ import (
 func sendMessage(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
-	fmt.Println(r.form)
+	//fmt.Println(r.form)
 }
 
 func login(w http.ResponseWriter, r *http.Request) {

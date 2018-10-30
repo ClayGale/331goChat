@@ -7,6 +7,10 @@
       <textarea rows="8" cols="50" style="resize: none; float: left; margin: 10px; text-align" id="dispMessages" name="dispMessages" disabled>
       </textarea>
 
-      <input type="text" style="margin:10px; text-align: center" value="Username" id="userName" name="userName" disabled><br>
+      <form method="post">
+        Message: <input type="text" name="message" id="message" value="message"><br>
+        <input type="hidden" value="insertuserhere">
+        <input type="submit" value="sendMessage">
+      </form>
     </body>
 </html>
