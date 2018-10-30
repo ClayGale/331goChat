@@ -28,7 +28,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-var chatTemplate = template.Must(template.ParseFiles(os.getwd("./chat.tmpl")))
+var chatTemplate = template.Must(template.ParseFiles(os.Getwd("./chat.tmpl")))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
