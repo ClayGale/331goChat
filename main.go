@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
@@ -28,7 +27,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-var chatTemplate = template.Must(template.ParseFiles(os.Getwd("./chat.tmpl")))
+var chatTemplate = template.Must(template.ParseFiles("./chat.tmpl"))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
