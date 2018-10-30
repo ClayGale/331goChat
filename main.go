@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
@@ -30,10 +31,6 @@ var chatTemplate = template.Must(template.ParseFiles("chat.gtpl"))
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	// retrieving form data from inputs
-	//nameTemp := r.Form["name"]
-	//colourTemp := r.Form["colour"]
-	//name := strings.Join(nameTemp, " ")
-	//colour := strings.Join(colourTemp, " ")
 
 	db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
 	checkErr(err)
@@ -51,8 +48,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 	checkErr(err)
 	fmt.Println(res)
 
-	data := &User{
-		username: r.Form["name"],
+	name := strings.Join(r.Form["name"], " ") //parsing the form input to a string
+	data := &User{                            //passing the username to the chat page for future use
+		username: name,
 	}
 
 	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
