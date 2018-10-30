@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "html/template"
+	"html/template"
 	"net/http"
 	_ "strings"
 
