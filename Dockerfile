@@ -1,6 +1,11 @@
 FROM golang:1.11.1
-RUN mkdir /app
-ADD . /app/
-WORKDIR /app/
+
+
+COPY ./go /go/src/github.com/ClayGale/331goChat
+WORKDIR /go/src/github.com/ClayGale/331goChat
+
+RUN go get ./
+
 RUN go build -o main .
-CMD ["/app/main"]
+EXPOSE 9090
+CMD ["/go/main"]
