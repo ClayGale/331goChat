@@ -33,12 +33,12 @@ label {
     color: #555;
     display: inline-block;
     margin-left: 18px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding-top: 1px;
+    font-size: 17px;
 }
 
 p a {
-    font-size: 11px;
+    font-size: 10px;
     color: #aaa;
     float: right;
     margin-top: -13px;
@@ -49,7 +49,6 @@ p a:hover {
 }
 input {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 12px;
     outline: none;
 }
 input[type=text] {
@@ -122,12 +121,15 @@ select#soflow, select#soflow-color {
    border: 1px solid #AAA;
    color: #555;
    font-size: inherit;
-   margin: 18px;
+   margin:15px;
    overflow: hidden;
    padding: 10px 10px;
    text-overflow: ellipsis;
    white-space: nowrap;
    width: 303px;
+}
+.padding{
+    padding-left: 20px;
 }
 
 /*select tag end*/

@@ -12,11 +12,11 @@
 <div id="container">       
 <form>
 <label for="username">Create a Username:</label>
-<input type="text" id="username" name="username">
-<br>
-<div class= padding>
+<input type="text" id="username" name="username" maxlength="20" required>
+<p style="padding-left: 20px">Choose a User Colour:</p>
+
 <select id="soflow">
-  <option value="0">Select your User Colour</option>
+  <option value="0" disabled>Select your User Colour</option>
   <option value="1">Red</option> <!--#FF0000-->
   <option value="2">Orange</option><!--#FFA500 -->
   <option value="3">Yellow</option><!--#FFFF00 -->
@@ -25,7 +25,6 @@
   <option value="4">Indigo</option><!-- #4b0082-->
   <option value="4">Violet</option><!-- #9400D3-->
 </select>
-</div>
 
 <div class=button>
 <button class="submit">Lets Chat</button>
