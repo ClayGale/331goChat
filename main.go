@@ -17,8 +17,10 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 }
 
 type User struct { //user struct for passing the username into the chat page
-	name string
+	username string
 }
+
+var chatTemplate = template.Must(template.ParseFiles("chat.gtpl"))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
@@ -40,15 +42,16 @@ func login(w http.ResponseWriter, r *http.Request) {
 		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
 		//checkErr(err)
 
-		res, err = stmt.Exec()
+		res, err = stmt.Exec() //running above sql
 		//checkErr(err)
 
 		data := &User{
 			username: name,
 		}
 
-		t, _ := template.ParseFiles("chat.gtpl", data)
-		t.Execute(w, nil)
+		chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
+		//t, _ := template.ParseFiles("chat.gtpl", data)
+		//t.Execute(w, nil)
 	}
 }
 
