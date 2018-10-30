@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
@@ -23,12 +24,12 @@ type User struct { //user struct for passing the username into the chat page
 
 func welcome(w http.ResponseWriter, r *http.Request) {
 
-	t, _ := template.ParseFiles("./login.gtpl") //sending login page
+	t, _ := template.ParseFiles("./login.gtpl")) //sending login page
 	t.Execute(w, nil)
 }
 
 //d, _ := os.Getwd()
-var chatTemplate = template.Must(template.ParseFiles("./chat.gohtml"))
+var chatTemplate = template.Must(template.ParseFiles(filepath.Join(os.Getwd(), "./chat.gohtml")))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
@@ -82,3 +83,34 @@ func main() {
 		log.Fatal("ListenAndServe: ", err)
 	}
 }
+
+// this had to be hardcoded because docker is evil
+const chatTemplateHTML = `<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="chat.css">
+  <link href='http://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <center><h2>Chat system using Golang</h2></center>
+  <h3>Chatter Away...</h3>
+  <center>
+    <textarea rows="20" cols="100" style="resize: none; float: left; margin: 10px; text-align" id="dispMessages" name="dispMessages" disabled></textarea>
+  </center>
+  <center>
+    <div class="main">
+      <div id="container">
+        <div class="chatBar">
+          <form method="post">
+            Message: <input type="text" class="message" placeholder="Type here to Chatter"><br><br>
+            <input type="hidden" value="insertuserhere">
+            <div class=button>
+              <input type="submit" class="submit" value="Send Message">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </center>
+</body>
+</html>
+    `
