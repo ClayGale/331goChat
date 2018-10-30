@@ -29,10 +29,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		r.ParseForm()
 		// retrieving form data from inputs
-		name := r.Form["name"]
-		colour := r.Form["colour"]
-		name := strings.Join(name, " ")
-		colour := strings.Join(colour, " ")
+		nameTemp := r.Form["name"]
+		colourTemp := r.Form["colour"]
+		name := strings.Join(nameTemp, " ")
+		colour := strings.Join(colourTemp, " ")
 
 		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
 		//checkErr(err)
@@ -40,7 +40,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
 		//checkErr(err)
 
-		res, err = stmt.Exec()
+		res, err = db.Exec(stmt)
 		//checkErr(err)
 
 		data := &User{
