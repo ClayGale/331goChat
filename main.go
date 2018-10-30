@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"strings"
 
@@ -68,4 +69,9 @@ func main() {
 	http.HandleFunc("/", welcome)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/sendMessage", sendMessage)
+
+	err := http.ListenAndServe(":9090", nil) // set listen port
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
