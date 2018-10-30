@@ -80,7 +80,7 @@ input[type=checkbox] {
 
 /*login button*/
 .button{
-    padding-left: 210px;
+    padding-left: 200px;
 }
 .submit {
   display: inline-block;
@@ -121,7 +121,7 @@ select#soflow, select#soflow-color {
    border: 1px solid #AAA;
    color: #555;
    font-size: inherit;
-   margin:15px;
+   margin:18px;
    overflow: hidden;
    padding: 10px 10px;
    text-overflow: ellipsis;
