@@ -41,10 +41,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 	stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS users ( name varchar(20), colour varchar(10))")
 	checkErr(err)
 
-	_, err := stmt.Exec() //running above sql
+	_, err = stmt.Exec() //running above sql
 	checkErr(err)
 	//inserting
-	stmt, err := db.Prepare("INSERT INTO users(name, colour) values(?,?)")
+	stmt, err = db.Prepare("INSERT INTO users(name, colour) values(?,?)")
 	checkErr(err)
 
 	res, err := stmt.Exec(r.Form["name"], r.Form["colour"]) //running above sql with value parameters
@@ -52,7 +52,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(res)
 
 	data := &User{
-		username: name,
+		username: r.Form["name"],
 	}
 
 	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
@@ -60,10 +60,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 	//t.Execute(w, nil)
 }
 
-func checkErr(error err) {
-	e := err.Error() //retrieving and printing error string
-	if e != nil {
-		fmt.Println(e)
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
 	}
 }
 
