@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
@@ -31,18 +30,24 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		r.ParseForm()
 		// retrieving form data from inputs
-		nameTemp := r.Form["name"]
-		colourTemp := r.Form["colour"]
-		name := strings.Join(nameTemp, " ")
-		colour := strings.Join(colourTemp, " ")
+		//nameTemp := r.Form["name"]
+		//colourTemp := r.Form["colour"]
+		//name := strings.Join(nameTemp, " ")
+		//colour := strings.Join(colourTemp, " ")
 
 		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
 		checkErr(err)
-
-		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
+		//creating users table if it doesnt exist already
+		stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS users ( name varchar(20), colour varchar(10))")
 		checkErr(err)
 
-		res, err := stmt.Exec() //running above sql
+		_, err := stmt.Exec() //running above sql
+		checkErr(err)
+		//inserting
+		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(?,?)")
+		checkErr(err)
+
+		res, err := stmt.Exec(r.Form["name"], r.Form["colour"]) //running above sql with value parameters
 		checkErr(err)
 		fmt.Println(res)
 
