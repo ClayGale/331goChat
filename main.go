@@ -28,7 +28,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 }
 
 //d, _ := os.Getwd()
-var chatTemplate = template.Must(template.ParseFiles("/usr/local/go/src/html/template/chat.tmpl"))
+var chatTemplate = template.Must(template.ParseFiles("./chat.gohtml"))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
