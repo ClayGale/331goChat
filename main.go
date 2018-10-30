@@ -13,7 +13,7 @@ import (
 func sendMessage(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
-	//fmt.Println(r.form)
+	fmt.Println(r.Form)
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
@@ -25,8 +25,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		r.ParseForm()
 		// retrieving form data from inputs
-		var name string = r.Form["name"]
-		var colour string = r.Form["colour"]
+		name := r.Form["name"]
+		colour := r.Form["colour"]
 
 		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
 		checkErr(err)
