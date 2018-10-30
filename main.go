@@ -55,7 +55,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		username: name,
 	}
 
-	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
+	//chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
 	//t, _ := template.ParseFiles("chat.gtpl", data)
 	//t.Execute(w, nil)
 }
