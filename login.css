@@ -47,9 +47,7 @@ input {
     font-size: 12px;
     outline: none;
 }
-input[type=text],
-
-select[type=colour] {
+input[type=text] {
     color: #777;
     padding-left: 10px;
     margin: 10px;
