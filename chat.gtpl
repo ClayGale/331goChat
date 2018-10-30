@@ -3,9 +3,10 @@
     <title></title>
     </head>
     <body>
-        <method="post">
-            Message: <input type="text" name="message" id="message" value="message"><br>
-            <input type="submit" value="sendMessage">
-        </form>
+      <h2>Chat system using Golang</h2>
+      <textarea rows="8" cols="50" style="resize: none; float: left; margin: 10px; text-align" id="dispMessages" name="dispMessages" disabled>
+      </textarea>
+
+      <input type="text" style="margin:10px; text-align: center" value="Username" id="userName" name="userName" disabled><br>
     </body>
 </html>
