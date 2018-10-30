@@ -56,7 +56,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func checkerr(string err) {
+func checkErr(string err) {
 	if err != nil {
 		fmt.Println(err)
 	}
