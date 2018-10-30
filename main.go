@@ -18,14 +18,31 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 
 func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
+
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("login.gtpl")
 		t.Execute(w, nil)
 	} else {
 		r.ParseForm()
-		// send inputs to chat page TODO
-		name := r.Form["name"]
-		colour := r.Form["colour"]
+		// retrieving form data from inputs
+		var name string = r.Form["name"]
+		var colour string = r.Form["colour"]
+
+		db, err := sql.Open("sqlite3", "./chat.db") //connecting to db
+		checkErr(err)
+
+		stmt, err := db.Prepare("INSERT INTO users(name, colour) values(" + name + "," + colour + ")")
+		checkErr(err)
+
+		res, err = stmt.Exec()
+		checkErr(err)
+
+		data := &Index{
+			username: name,
+		}
+
+		t, _ := template.ParseFiles("chat.gtpl", data)
+		t.Execute(w, nil)
 	}
 }
 

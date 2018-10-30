@@ -3,8 +3,10 @@ simple golang based chatroom app for cosc331
 
 Step 1:
 create digital ocean server //EXPAND
+
 Step 2:
 Install relevant software
+
 Step n:
 Create the database tables with
 ```
