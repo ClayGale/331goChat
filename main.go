@@ -6,8 +6,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strings"
 	"os"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
 )
@@ -27,9 +27,6 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("./login.gtpl") //sending login page
 	t.Execute(w, nil)
 }
-
-d, _ := os.Getwd()
-var chatTemplate = template.Must(template.ParseFiles(d + "/chat.tmpl"))
 
 func login(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
@@ -55,6 +52,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 	data := &User{                            //passing the username to the chat page for future use
 		username: name,
 	}
+
+	d, _ := os.Getwd()
+	var chatTemplate = template.Must(template.ParseFiles(d + "/chat.tmpl"))
 
 	chatTemplate.Execute(w, data) //opening the chat page and passing the username for reference
 	//t, _ := template.ParseFiles("chat.gtpl", data)
