@@ -1,10 +1,10 @@
 package main
 
 import (
-	_ "database/sql"
-	_ "fmt"
+	"database/sql"
+	"fmt"
 	_ "html/template"
-	_ "net/http"
+	"net/http"
 	_ "strings"
 
 	_ "github.com/mattn/go-sqlite3" // https://github.com/mattn/go-sqlite3/blob/master/README.md
